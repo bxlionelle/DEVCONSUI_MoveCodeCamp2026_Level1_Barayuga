@@ -37,7 +37,7 @@ const PortfolioView = () => {
   // ==========================================================================
   // STATE MANAGEMENT
   // ==========================================================================
-  const objectId = "0xdfc11c96b52ea7d4ae2d05bd0c375e81938933f1f8621a9c14a3aaca66999dc8";
+  const objectId = "0xe6606a397cde79f1aee01ed7c21968844b360c2cea8bbc950b723dd330bcc113";
   
   // Network state - default to testnet, can be changed if needed
   const [currentNetwork, setCurrentNetwork] = useState<"testnet" | "mainnet">("mainnet");
@@ -99,7 +99,7 @@ const PortfolioView = () => {
             about: fields.about || defaultPortfolioData.about,
             linkedin: fields.linkedin_url || defaultPortfolioData.linkedin,
             github: fields.github_url || defaultPortfolioData.github,
-            skills: fields.skills || defaultPortfolioData.skills,
+            skills: fields.skills ? fields.skills.split(",").map(s => s.trim()) : defaultPortfolioData.skills,
           };
           
           setPortfolioData(newPortfolioData);

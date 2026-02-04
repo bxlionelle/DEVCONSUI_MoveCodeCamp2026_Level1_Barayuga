@@ -4,6 +4,7 @@ module portfolio::portfolio {
     use sui::tx_context::{Self, TxContext};
     use std::string::String;
 
+    /// Portfolio struct optimized for CLI-only deployment
     struct Portfolio has key, store {
         id: UID,
         name: String,
@@ -12,10 +13,10 @@ module portfolio::portfolio {
         about: String,
         linkedin_url: String,
         github_url: String,
-        skills: vector<String>,
-        // profile_photo_object_id field removed
+        skills: String, // comma-separated string for CLI deployment
     }
 
+    /// Create a new portfolio object
     public fun create_portfolio(
         sender: address,
         name: String,
@@ -24,8 +25,7 @@ module portfolio::portfolio {
         about: String,
         linkedin_url: String,
         github_url: String,
-        skills: vector<String>,
-        // profile_photo_object_id parameter removed
+        skills: String, // single string now
         ctx: &mut TxContext
     ) {
         let portfolio = Portfolio {
@@ -37,10 +37,7 @@ module portfolio::portfolio {
             linkedin_url,
             github_url,
             skills,
-            // profile_photo_object_id field removed
         };
         transfer::transfer(portfolio, sender);
     }
-
-    // Removed update_profile_photo function since there's no profile photo field anymore
 }
