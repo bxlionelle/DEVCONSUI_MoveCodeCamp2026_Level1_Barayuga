@@ -1,4 +1,3 @@
-// Your Move file stays the SAME, just deploy to testnet
 module portfolio::portfolio {
     use sui::object::{Self, UID};
     use sui::transfer;
@@ -14,7 +13,7 @@ module portfolio::portfolio {
         linkedin_url: String,
         github_url: String,
         skills: vector<String>,
-        profile_photo_object_id: String,  // ADDED
+        // profile_photo_object_id field removed
     }
 
     public fun create_portfolio(
@@ -26,7 +25,7 @@ module portfolio::portfolio {
         linkedin_url: String,
         github_url: String,
         skills: vector<String>,
-        profile_photo_object_id: String,  // ADDED
+        // profile_photo_object_id parameter removed
         ctx: &mut TxContext
     ) {
         let portfolio = Portfolio {
@@ -38,15 +37,10 @@ module portfolio::portfolio {
             linkedin_url,
             github_url,
             skills,
-            profile_photo_object_id,  // ADDED
+            // profile_photo_object_id field removed
         };
         transfer::transfer(portfolio, sender);
     }
 
-    public entry fun update_profile_photo(
-        portfolio: &mut Portfolio,
-        new_profile_photo_object_id: String,
-    ) {
-        portfolio.profile_photo_object_id = new_profile_photo_object_id;
-    }
+    // Removed update_profile_photo function since there's no profile photo field anymore
 }
